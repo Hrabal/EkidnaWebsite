@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-from sqlalchemy.orm import RelationshipProperty
+#from sqlalchemy.orm import RelationshipProperty
 
 
 def dump_datetime(value):
