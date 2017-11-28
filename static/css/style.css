@@ -38,7 +38,7 @@ body {
 .bigLetter {
 	text-align: center;
 	float: left;
-	font-size: 12.5vw;
+	font-size: 19vmin;
 	height: 30vh;
 	width: 12.5vw;
 	background: red;
@@ -52,7 +52,8 @@ body {
 }
 
 .menuItem {
-	font-size: 2vw;
+    font-size: 2vmin;
+    word-wrap: break-word;
 	display: none;
 	cursor: pointer;
 }
@@ -62,8 +63,7 @@ body {
 	top: 30vh;
 	height: 70vh;
 	width: 100%;
-	background: dimgrey;
-	mix-blend-mode: color-dodge;
+	background: #333333;
 	
 }
 
@@ -71,5 +71,7 @@ body {
 	position: absolute;
 	overflow-y: scroll;
 	height: 100%;
-	width: 100%;
+	width: 71vw;
+	margin-left: 2vw;
+	color: darkgrey;
 }
