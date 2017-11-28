@@ -3,3 +3,4 @@ SQLAlchemy==1.1.14
 Flask==0.12.2
 Flask-Login==0.4.0
 Flask-SQLAlchemy==2.2
+tem-py>=1.1.0
