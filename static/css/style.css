@@ -159,3 +159,22 @@ blockquote p {
 	float: left;
 }
 
+/*  EVENTS  */
+
+.event {
+    padding-bottom: 1vh;
+    padding-top: 1vh;
+}
+
+.eventDate {
+	font-size: 2.5vw;
+	color: indianred;
+	font-family: 'Source Code Pro', monospace;
+}
+
+.eventTitle {
+	font-size: 1.5vw;
+	color: indianred;
+	font-family: 'Source Code Pro', monospace;
+}
+

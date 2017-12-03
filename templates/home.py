@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+import arrow
+from operator import itemgetter
 from flask import url_for, g
-from tempy.tags import Div, Img, Link, Script, H2, Meta, Center, Br, A
+from tempy.tags import Div, Img, Link, Script, H2, Meta, Center, Br, A, Pre, Blockquote
 from tempy.elements import Css
 from tempy.widgets import TempyPage
 
@@ -81,9 +83,12 @@ class Galleria(Div):
 
 class Eventi(Div):
     def init(self):
-        self(
-            """Work in progress"""
-        )
+        self(Div(klass='pageTitle')('Eventi'))
+        for event in sorted(self._data['events']['data'], key=itemgetter('start_time'), reverse=True):
+            self(
+                Div(klass='event')(
+                    Div(klass='eventDate')(arrow.get(event['start_time']).strftime('%d-%m-%Y')), Div(klass="eventTitle")(event['name']), Pre(klass="preText")(event['description']))
+            )
 
 
 class Contatti(Div):
