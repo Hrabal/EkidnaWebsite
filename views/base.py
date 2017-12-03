@@ -15,7 +15,8 @@ def index():
 
 @app.route('/chi_siamo')
 def chi_siamo():
-    return ChiSiamo().render()
+    files = os.listdir(os.path.join(app.static_folder, 'files', 'chisiamo'))
+    return ChiSiamo(data={'files': files}).render()
 
 
 @app.route('/eventi')
@@ -41,6 +42,7 @@ def dove_siamo():
     return DoveSiamo().render()
 
 
-@app.route('/social')
-def social():
-    return Social().render()
+@app.route('/rottura_del_silenzio')
+def rottura():
+    locandine = os.listdir(os.path.join(app.static_folder, 'img', 'rottura'))
+    return Rottura(data={'locandine': locandine}).render()
