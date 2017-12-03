@@ -20,7 +20,7 @@ class HomePage(TempyPage):
     def css(self):
         return [
             Link(href=url_for('static', filename='css/style.css'), rel="stylesheet", typ="text/css"),
-            Link(href='https://fonts.googleapis.com/css?family=Source+Code+Pro:700', rel="stylesheet"),
+            Link(href='https://fonts.googleapis.com/css?family=Montserrat|Source+Code+Pro:700', rel="stylesheet"),
         ]
 
     default_init = {
@@ -76,8 +76,10 @@ class ChiSiamo(Div):
 
 class Galleria(Div):
     def init(self):
-        self(
-            """Work in progress"""
+        self(Div(klass='pageTitle')('Galleria'))
+        self(Div(id='photos')(
+                Img(src=url_for('static', filename=f'img/gallery/{pic}')) for pic in self._data.get('pics',[])
+            )
         )
 
 

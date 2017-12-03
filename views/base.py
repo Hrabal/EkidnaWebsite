@@ -27,7 +27,8 @@ def eventi():
 
 @app.route('/galleria')
 def galleria():
-    return Galleria().render()
+    pics = os.listdir(os.path.join(app.static_folder, 'img', 'gallery'))
+    return Galleria(data={'pics': pics}).render()
 
 
 @app.route('/contatti')
