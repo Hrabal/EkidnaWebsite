@@ -76,14 +76,14 @@ La struttura fu consegnata in stato di totale abbandono e, da allora, la scelta 
 
 Ekidna è un centro autogestito, completamente slegato da qualsiasi partito o potere politico, che deve quindi auto-finanziarsi completamente, con iniziative di vario genere, legate alle varie discipline artistiche e ad attività culturali."""),
         )
-        self(Div(klass='pdf')(A(target='_blank', href=url_for('static', filename=f'files/chisiamo/{file}'))(Img(klass='socialIcon', src=url_for('static', filename='img/pdf.png')), file.title()[:-4])) for file in self._data['files'])
+        self(Div(klass='pdf')(A(target='_blank', href=url_for('static', filename='files/chisiamo/%s' % file))(Img(klass='socialIcon', src=url_for('static', filename='img/pdf.png')), file.title()[:-4])) for file in self._data['files'])
 
 
 class Galleria(Div):
     def init(self):
         self(Div(klass='pageTitle')('Galleria'))
         self(Div(id='photos')(
-                Img(src=url_for('static', filename=f'img/gallery/{pic}')) for pic in self._data.get('pics',[])
+                Img(src=url_for('static', filename='img/gallery/%s' % pic)) for pic in self._data.get('pics',[])
             )
         )
 
@@ -136,6 +136,6 @@ Uno di questi si chiama Ekidna, un circolo alle porte di Carpi (San Martino Scuo
         )
         self(Br(), Br())
         self(Div(id='photos')(
-                Img(src=url_for('static', filename=f'img/rottura/{pic}')) for pic in sorted(self._data.get('locandine',[]), reverse=True)
+                Img(src=url_for('static', filename='img/rottura/%s' % pic)) for pic in sorted(self._data.get('locandine',[]), reverse=True)
             )
         )
