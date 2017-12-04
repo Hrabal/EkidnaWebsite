@@ -14,11 +14,15 @@ class HomePage(TempyPage):
     def js(self):
         return [
             Script(src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"),
+            Script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js", integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN", crossorigin="anonymous"),
+Script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js", integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh", crossorigin="anonymous"),
+Script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js", integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ", crossorigin="anonymous"),
             Script(src=url_for('static', filename='js/main.js')),
         ]
 
     def css(self):
         return [
+            Link(href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb", crossorigin="anonymous"),
             Link(href=url_for('static', filename='css/style.css'), rel="stylesheet", typ="text/css"),
             Link(href='https://fonts.googleapis.com/css?family=Montserrat|Source+Code+Pro:700', rel="stylesheet"),
         ]
@@ -31,19 +35,20 @@ class HomePage(TempyPage):
 
     def init(self):
         self.head(self.css(), self.js())
+        self.head(Meta(charset="utf-8"), Meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no",))
         self.head.title(self.default_init['title'])
         self.body(
             Div(id='bg')(Img(src=url_for('static', filename='img/bg.jpg'))),
-            Div(id='container')(
-                Div(id='title')(
-                    Div(klass='bigLetter')('E', Div(klass='menuItem', link="/chi_siamo")('Chi Siamo')),
-                    Div(klass='bigLetter')('k', Div(klass='menuItem', link="/eventi")('Eventi')),
-                    Div(klass='bigLetter')('i', Div(klass='menuItem', link="/galleria")('Galleria')),
-                    Div(klass='bigLetter')('d', Div(klass='menuItem', link="/contatti")('Contatti')),
-                    Div(klass='bigLetter')('n', Div(klass='menuItem', link="/dove_siamo")('Dove Siamo')),
-                    Div(klass='bigLetter')('a', Div(klass='menuItem', link="/rottura_del_silenzio")('Rottura Del Silenzio')),
+            Div(id='container', klass='container')(
+                Div(id='row no-gutters align-items-end justify-content-around')(
+                    Div(klass='col-6 bigLetter')('E', Div(klass='menuItem', link="/chi_siamo")('Chi Siamo')),
+                    Div(klass='col-6 bigLetter')('k', Div(klass='menuItem', link="/eventi")('Eventi')),
+                    Div(klass='col-6 bigLetter')('i', Div(klass='menuItem', link="/galleria")('Galleria')),
+                    Div(klass='col-6 bigLetter')('d', Div(klass='menuItem', link="/contatti")('Contatti')),
+                    Div(klass='col-6 bigLetter')('n', Div(klass='menuItem', link="/dove_siamo")('Dove Siamo')),
+                    Div(klass='col-6 bigLetter')('a', Div(klass='menuItem', link="/rottura_del_silenzio")('Rottura Del Silenzio')),
                 ),
-                Div(id='content_container')(Div(id='content'))
+                Div(id='row no-gutters align-items-start justify-content-center content_container')(Div(id='content'))
             )
         )
 
@@ -55,7 +60,7 @@ class DoveSiamo(Div):
             Div(id='map_container')(
                 Meta(name="viewport", content="initial-scale=1.0, user-scalable=no"),
                 Meta(charset="utf-8"),
-                Css({'#map': {'height': '62vh'}}),
+                Css({'#map': {'height': '62vh', "box-sizing": "content-box"}}),
                 Div(id='map'),
                 Script(src=url_for('static', filename='js/gmap.js'))(),
                 Script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCE74FjhQ39oEwV9kuBI8qedSFOKBWypyQ&callback=initMap", async=bool, defer=bool)
