@@ -13,10 +13,9 @@ content = 'Ekdina'
 class HomePage(TempyPage):
     def js(self):
         return [
-            Script(src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"),
-            Script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js", integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN", crossorigin="anonymous"),
-Script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js", integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh", crossorigin="anonymous"),
-Script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js", integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ", crossorigin="anonymous"),
+            Script(src="https://code.jquery.com/jquery-3.2.1.min.js", crossorigin="anonymous"),
+            Script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js", integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh", crossorigin="anonymous"),
+            Script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js", integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ", crossorigin="anonymous"),
             Script(src=url_for('static', filename='js/main.js')),
         ]
 
@@ -39,16 +38,16 @@ Script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.
         self.head.title(self.default_init['title'])
         self.body(
             Div(id='bg')(Img(src=url_for('static', filename='img/bg.jpg'))),
-            Div(id='container', klass='container')(
-                Div(id='row no-gutters align-items-end justify-content-around')(
-                    Div(klass='col-6 bigLetter')('E', Div(klass='menuItem', link="/chi_siamo")('Chi Siamo')),
-                    Div(klass='col-6 bigLetter')('k', Div(klass='menuItem', link="/eventi")('Eventi')),
-                    Div(klass='col-6 bigLetter')('i', Div(klass='menuItem', link="/galleria")('Galleria')),
-                    Div(klass='col-6 bigLetter')('d', Div(klass='menuItem', link="/contatti")('Contatti')),
-                    Div(klass='col-6 bigLetter')('n', Div(klass='menuItem', link="/dove_siamo")('Dove Siamo')),
-                    Div(klass='col-6 bigLetter')('a', Div(klass='menuItem', link="/rottura_del_silenzio")('Rottura Del Silenzio')),
+            Div(klass='container')(
+                Div(id='title', klass='row no-gutters align-items-end justify-content-around')(
+                    Div(klass='col-md bigLetter')('E', Div(klass='menuItem', link="/chi_siamo")('Chi Siamo')),
+                    Div(klass='col-md bigLetter')('k', Div(klass='menuItem', link="/eventi")('Eventi')),
+                    Div(klass='col-md bigLetter')('i', Div(klass='menuItem', link="/galleria")('Galleria')),
+                    Div(klass='col-md bigLetter')('d', Div(klass='menuItem', link="/contatti")('Contatti')),
+                    Div(klass='col-md bigLetter')('n', Div(klass='menuItem', link="/dove_siamo")('Dove Siamo')),
+                    Div(klass='col-md bigLetter')('a', Div(klass='menuItem', link="/rottura_del_silenzio")('Rottura Del Silenzio')),
                 ),
-                Div(id='row no-gutters align-items-start justify-content-center content_container')(Div(id='content'))
+                Div(id='content_container', klass='row no-gutters align-items-start justify-content-center content_container')(Div(id='content', klass="col-md"))
             )
         )
 
