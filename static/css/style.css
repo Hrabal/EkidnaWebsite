@@ -44,7 +44,7 @@ body {
 
 .bigLetter {
 	text-align: center;
-	font-size: 5vw;
+	font-size: 5vmin;
 	height: 17vh;
 	background: red;
 	mix-blend-mode: soft-light;
