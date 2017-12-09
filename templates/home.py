@@ -2,6 +2,7 @@
 import arrow
 from operator import itemgetter
 from flask import url_for, g
+from tempy.tempy import Escaped
 from tempy.tags import Div, Img, Link, Script, H2, Meta, Center, Br, A, Pre, Blockquote
 from tempy.elements import Css
 from tempy.widgets import TempyPage
@@ -47,9 +48,19 @@ class HomePage(TempyPage):
                     Div(klass='col-md bigLetter')('n', Div(klass='menuItem', link="/dove_siamo")('Dove Siamo')),
                     Div(klass='col-md bigLetter')('a', Div(klass='menuItem', link="/rottura_del_silenzio")('Rottura Del Silenzio')),
                 ),
-                Div(id='content_container', klass='row no-gutters align-items-start justify-content-center content_container')(Div(id='content', klass="col-md"))
+                Div(id='content_container', klass='row no-gutters align-items-start justify-content-center content_container')(Div(id='content', klass="col-md")(
+                    self._get_analytics()
+                  ))
             )
         )
+
+    def _get_analytics(self):
+        return [Script(async=True, src="https://www.googletagmanager.com/gtag/js?id=UA-110964364-1"),
+                Script()(Escaped("""window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-110964364-1');"""))
+                ]
 
 
 class DoveSiamo(Div):
@@ -81,6 +92,7 @@ La struttura fu consegnata in stato di totale abbandono e, da allora, la scelta 
 Ekidna è un centro autogestito, completamente slegato da qualsiasi partito o potere politico, che deve quindi auto-finanziarsi completamente, con iniziative di vario genere, legate alle varie discipline artistiche e ad attività culturali."""),
         )
         self(Div(klass='pdf')(A(target='_blank', href=url_for('static', filename='files/chisiamo/%s' % file))(Img(klass='socialIcon', src=url_for('static', filename='img/pdf.png')), file.title()[:-4])) for file in self._data['files'])
+        self(self._get_analytics())
 
 
 class Galleria(Div):
@@ -90,6 +102,7 @@ class Galleria(Div):
                 Img(src=url_for('static', filename='img/gallery/%s' % pic)) for pic in self._data.get('pics',[])
             )
         )
+        self(self._get_analytics())
 
 
 class Eventi(Div):
@@ -100,6 +113,7 @@ class Eventi(Div):
                 Div(klass='event')(
                     Div(klass='eventDate')(arrow.get(event['start_time']).strftime('%d-%m-%Y')), Div(klass="eventTitle")(event['name']), Pre(klass="preText")(event['description']))
             )
+        self(self._get_analytics())
 
 
 class Contatti(Div):
@@ -119,6 +133,7 @@ class Contatti(Div):
             Img(klass='socialIcon', src=url_for('static', filename='img/social/twitter.png')), A(href='http://twitter.com/ekidnacarpi')('Twitter'),
             Img(klass='socialIcon', src=url_for('static', filename='img/social/youtube.png')), A(href='http://www.youtube.com/channel/UC9URlWUKYelFlTBrFvc7Nyw')('YouTube'),
         )
+        self(self._get_analytics())
 
 
 class Rottura(Div):
@@ -143,3 +158,4 @@ Uno di questi si chiama Ekidna, un circolo alle porte di Carpi (San Martino Scuo
                 Img(src=url_for('static', filename='img/rottura/%s' % pic)) for pic in sorted(self._data.get('locandine',[]), reverse=True)
             )
         )
+        self(self._get_analytics())
