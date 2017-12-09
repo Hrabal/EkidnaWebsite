@@ -11,7 +11,17 @@ base_keywords = ['ekdina', 'musica', 'carpi', 'centro sociale', 'live', ]
 content = 'Ekdina'
 
 
-class HomePage(TempyPage):
+class GoogleAnalizzabile:
+    def _get_analytics(self):
+        return [Script(async=True, src="https://www.googletagmanager.com/gtag/js?id=UA-110964364-1"),
+                Script()(Escaped("""window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-110964364-1');"""))
+                ]
+
+
+class HomePage(TempyPage, GoogleAnalizzabile):
     def js(self):
         return [
             Script(src="https://code.jquery.com/jquery-3.2.1.min.js", crossorigin="anonymous"),
@@ -54,16 +64,10 @@ class HomePage(TempyPage):
             )
         )
 
-    def _get_analytics(self):
-        return [Script(async=True, src="https://www.googletagmanager.com/gtag/js?id=UA-110964364-1"),
-                Script()(Escaped("""window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-110964364-1');"""))
-                ]
 
 
-class DoveSiamo(Div):
+
+class DoveSiamo(Div, GoogleAnalizzabile):
     def init(self):
         self(
             Center()(H2()('Via Livorno 9, 41012 Carpi (MO)')),
@@ -78,7 +82,7 @@ class DoveSiamo(Div):
         )
 
 
-class ChiSiamo(Div):
+class ChiSiamo(Div, GoogleAnalizzabile):
     def init(self):
         self(
             Center()(Img(src=url_for('static', filename='img/ekidna.png'))), Br(),
@@ -95,7 +99,7 @@ Ekidna è un centro autogestito, completamente slegato da qualsiasi partito o po
         self(self._get_analytics())
 
 
-class Galleria(Div):
+class Galleria(Div, GoogleAnalizzabile):
     def init(self):
         self(Div(klass='pageTitle')('Galleria'))
         self(Div(id='photos')(
@@ -105,7 +109,7 @@ class Galleria(Div):
         self(self._get_analytics())
 
 
-class Eventi(Div):
+class Eventi(Div, GoogleAnalizzabile):
     def init(self):
         self(Div(klass='pageTitle')('Eventi'))
         for event in sorted(self._data['events']['data'], key=itemgetter('start_time'), reverse=True):
@@ -116,7 +120,7 @@ class Eventi(Div):
         self(self._get_analytics())
 
 
-class Contatti(Div):
+class Contatti(Div, GoogleAnalizzabile):
     def init(self):
         self(Div(klass='pageTitle')('Contatti'))
         self(
@@ -136,7 +140,7 @@ class Contatti(Div):
         self(self._get_analytics())
 
 
-class Rottura(Div):
+class Rottura(Div, GoogleAnalizzabile):
     def init(self):
         self(Div(klass='pageTitle')('Rottura Del Silenzio'))
         self(
